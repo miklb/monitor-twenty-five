@@ -134,6 +134,9 @@
                     ]
                 }
             ]
+        },
+        "patterns": {
+            "register": true
         }
     },
     "styles": {
