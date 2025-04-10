@@ -1,0 +1,25 @@
+body {
+    background-color: #f0f0f0; /* Example background color */
+    color: #333333; /* Example text color */
+}
+
+a {
+    color: #0073aa; /* Example link color */
+}
+
+a:hover {
+    color: #005177; /* Example link hover color */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #222222; /* Example heading color */
+}
+
+.button {
+    background-color: #0073aa; /* Example button background color */
+    color: #ffffff; /* Example button text color */
+}
+
+.button:hover {
+    background-color: #005177; /* Example button hover background color */
+}
