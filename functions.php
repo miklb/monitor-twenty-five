@@ -37,4 +37,37 @@ function monitor_custom_register_patterns() {
     );
 }
 add_action('init', 'monitor_custom_register_patterns');
+
+/**
+ * Add custom meta boxes
+ */
+function monitor_custom_meta_boxes() {
+    add_meta_box(
+        'hide_featured_image',
+        'Featured Image Options',
+        'monitor_custom_featured_image_callback',
+        'post',
+        'side'
+    );
+}
+add_action('add_meta_boxes', 'monitor_custom_meta_boxes');
+
+function monitor_custom_featured_image_callback($post) {
+    $value = get_post_meta($post->ID, 'hide_featured_image', true);
+    ?>
+    <label>
+        <input type="checkbox" name="hide_featured_image" value="1" <?php checked($value, '1'); ?> />
+        Hide featured image on post
+    </label>
+    <?php
+}
+
+function monitor_custom_save_meta($post_id) {
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    if (!current_user_can('edit_post', $post_id)) return;
+    
+    $hide_featured = isset($_POST['hide_featured_image']) ? '1' : '';
+    update_post_meta($post_id, 'hide_featured_image', $hide_featured);
+}
+add_action('save_post', 'monitor_custom_save_meta');
 ?>
