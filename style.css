@@ -14,10 +14,10 @@ Text Domain: monitor-custom
 /* Custom styles can be added below */
 
 /* Add padding to ordered list items but not to the last one */
-.wp-block-list li {
-  padding-bottom: 1rem !important;
+ol.wp-block-list li {
+  padding-bottom: 1rem;
 }
 
-.wp-block-listl li:last-child {
-  padding-bottom: 0 !important;
+ol.wp-block-listl li:last-child {
+  padding-bottom: 0;
 }
