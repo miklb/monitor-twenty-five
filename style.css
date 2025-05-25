@@ -13,6 +13,10 @@ Text Domain: monitor-custom
 
 /* Custom styles can be added below */
 
+@view-transition {
+  navigation: auto;
+}
+
 /* Add padding to ordered list items but not to the last one */
 ol.wp-block-list li {
   padding-bottom: 1rem;
