@@ -167,4 +167,13 @@ function monitor_twentyfive_save_meta($post_id) {
     update_post_meta($post_id, 'hide_featured_image', $hide_featured);
 }
 add_action('save_post', 'monitor_twentyfive_save_meta');
+
+/**
+ * Enqueue custom editor styles for block editor.
+ */
+function monitor_twentyfive_add_editor_styles() {
+    add_theme_support('editor-styles');
+    add_editor_style('assets/css/editor-styles.css');
+}
+add_action('after_setup_theme', 'monitor_twentyfive_add_editor_styles');
 ?>
