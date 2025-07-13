@@ -94,26 +94,9 @@ ol.wp-block-listl li:last-child {
 
 /* Ordered list styling inside details block */
 .wp-block-details ol {
-  padding-block: var(--wp--preset--spacing--40);
-  padding-inline: var(--wp--preset--spacing--40);
-  padding-left: calc(
-    var(--wp--preset--spacing--40) + var(--wp--preset--spacing--30)
-  ); /* Extra space for list numbers */
+  padding: var(--wp--preset--spacing--40);
   margin: 0;
   background: var(--wp--preset--color--base); /* #F1F1E6 */
-  font-family: var(--wp--preset--font-family--pt-serif);
-  line-height: 1.6;
-  color: var(--wp--preset--color--contrast); /* #314A59 */
-}
-
-.wp-block-details ol li {
-  margin-bottom: var(
-    --wp--preset--spacing--10
-  ); /* Reduced spacing between items */
-}
-
-.wp-block-details ol li:last-child {
-  margin-bottom: 0;
 }
 
 /* Supporting Documents List Styling */
@@ -181,17 +164,9 @@ ol.wp-block-listl li:last-child {
     padding-block: var(--wp--preset--spacing--20);
     padding-inline: var(--wp--preset--spacing--30);
   }
-
   .wp-block-details p,
   .wp-block-details ol {
-    padding-block: var(--wp--preset--spacing--30);
-    padding-inline: var(--wp--preset--spacing--30);
-  }
-
-  .wp-block-details ol {
-    padding-left: calc(
-      var(--wp--preset--spacing--30) + var(--wp--preset--spacing--20)
-    ); /* Adjust for mobile */
+    padding: var(--wp--preset--spacing--30);
   }
 
   .agenda-supporting-docs {
