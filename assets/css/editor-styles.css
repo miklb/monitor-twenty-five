@@ -57,6 +57,7 @@
 /* Ordered list styling inside details block for editor */
 .editor-styles-wrapper .wp-block-details .wp-block-list {
   padding: 2rem;
+  padding-left: 3.5rem; /* Extra space for list numbers */
   margin: 0;
   background: #f1f1e6; /* base */
   font-family: "PT Serif", serif;
@@ -65,7 +66,7 @@
 }
 
 .editor-styles-wrapper .wp-block-details .wp-block-list li {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem; /* Reduced spacing between items */
 }
 
 .editor-styles-wrapper .wp-block-details .wp-block-list li:last-child {
