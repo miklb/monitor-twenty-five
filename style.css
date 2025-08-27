@@ -17,15 +17,6 @@ Text Domain: monitor-custom
   navigation: auto;
 }
 
-/* Add padding to ordered list items but not to the last one */
-ol.wp-block-list li {
-  padding-bottom: 1rem;
-}
-
-ol.wp-block-listl li:last-child {
-  padding-bottom: 0;
-}
-
 /* WordPress Details Block Styling - Tampa Monitor Theme */
 .wp-block-details {
   border: 1px solid var(--wp--preset--color--accent-4); /* #8A8A82 */
@@ -33,6 +24,20 @@ ol.wp-block-listl li:last-child {
   margin: var(--wp--preset--spacing--40) 0;
   background: var(--wp--preset--color--base); /* #F1F1E6 */
   overflow: hidden;
+}
+
+/* Ensure proper display order for agenda items */
+.wp-block-list-item {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.wp-block-list-item .wp-block-details {
+  order: 1 !important;
+}
+
+.wp-block-list-item .agenda-supporting-docs {
+  order: 2 !important;
 }
 
 .wp-block-details summary {
@@ -99,29 +104,28 @@ ol.wp-block-listl li:last-child {
   background: var(--wp--preset--color--base); /* #F1F1E6 */
 }
 
-/* Supporting Documents List Styling */
-.agenda-supporting-docs {
-  margin-top: var(--wp--preset--spacing--40);
-  padding-top: var(--wp--preset--spacing--30);
-  border-top: 1px solid var(--wp--preset--color--accent-4); /* #8A8A82 */
+/* Supporting Documents Container - Now using proper WordPress blocks */
+.wp-block-group.agenda-supporting-docs {
+  margin: var(--wp--preset--spacing--40) 0;
 }
 
-.agenda-supporting-docs h4 {
+.wp-block-group.agenda-supporting-docs .wp-block-heading {
   font-family: var(--wp--preset--font-family--libre-franklin);
   font-weight: 600;
   color: var(--wp--preset--color--contrast); /* #314A59 */
   margin: 0 0 var(--wp--preset--spacing--20) 0;
-  font-size: var(--wp--preset--font-size--medium);
+  border-top: 1px solid var(--wp--preset--color--accent-4); /* #8A8A82 */
+  padding-top: var(--wp--preset--spacing--30);
 }
 
-.agenda-supporting-docs .wp-block-list {
+.wp-block-group.agenda-supporting-docs .wp-block-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
 /* CSS Grid layout for supporting docs with 6+ items */
-.agenda-supporting-docs .wp-block-list:has(li:nth-child(7)) {
+.wp-block-group.agenda-supporting-docs .wp-block-list:has(li:nth-child(7)) {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--wp--preset--spacing--20) var(--wp--preset--spacing--30);
@@ -129,11 +133,11 @@ ol.wp-block-listl li:last-child {
 }
 
 /* Reset margins for grid items */
-.agenda-supporting-docs .wp-block-list:has(li:nth-child(7)) li {
+.wp-block-group.agenda-supporting-docs .wp-block-list:has(li:nth-child(7)) li {
   margin-bottom: 0;
 }
 
-.agenda-supporting-docs .wp-block-list li {
+.wp-block-group.agenda-supporting-docs .wp-block-list li {
   margin-bottom: var(
     --wp--preset--spacing--10
   ); /* Reduced from spacing--20 for more compact layout */
@@ -146,20 +150,15 @@ ol.wp-block-listl li:last-child {
   ); /* Apply small font to entire list item */
 }
 
-.agenda-supporting-docs .wp-block-list li::before {
-  content: "";
-  background-image: url("data:image/svg+xml,%3Csvg fill='none' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath clip-rule='evenodd' d='m17.9584 12.5417-7.5833-7.58336h-3.79169c-.29915 0-.54166.24251-.54166.54166v13c0 .2991.24251.5417.54166.5417h10.83329c.2992 0 .5417-.2426.5417-.5417zm-9.20832-9.20836h7.04162 1.625c1.1967 0 2.1667.97005 2.1667 2.16666v1.625 7.0417 4.3333c0 1.1967-.97 2.1667-2.1667 2.1667h-10.83329c-1.19661 0-2.16666-.97-2.16666-2.1667v-13c0-1.19661.97005-2.16666 2.16666-2.16666z' fill='currentColor' fill-rule='evenodd'/%3E%3C/svg%3E");
-  background-size: 1.1em 1.1em;
-  background-repeat: no-repeat;
-  background-position: center;
+.wp-block-group.agenda-supporting-docs .wp-block-list li::before {
+  content: "📄";
   position: absolute;
   left: 0;
   top: 0;
-  width: 1.1em;
-  height: 1.1em;
+  font-size: 1.1em;
 }
 
-.agenda-supporting-docs .wp-block-list a {
+.wp-block-group.agenda-supporting-docs .wp-block-list a {
   color: var(--wp--preset--color--accent-3); /* #1D636B */
   text-decoration: underline;
   text-decoration-color: var(--wp--preset--color--accent-1); /* #E6B45E */
@@ -171,13 +170,13 @@ ol.wp-block-listl li:last-child {
   transition: all 0.3s ease;
 }
 
-.agenda-supporting-docs .wp-block-list a:hover {
+.wp-block-group.agenda-supporting-docs .wp-block-list a:hover {
   color: var(--wp--preset--color--contrast); /* #314A59 */
   text-decoration-color: var(--wp--preset--color--accent-3); /* #1D636B */
   text-decoration-thickness: 3px;
 }
 
-.agenda-supporting-docs .wp-block-list a:focus {
+.wp-block-group.agenda-supporting-docs .wp-block-list a:focus {
   outline: 2px solid var(--wp--preset--color--accent-1); /* #E6B45E */
   outline-offset: 2px;
   border-radius: 3px;
@@ -194,16 +193,16 @@ ol.wp-block-listl li:last-child {
     padding: var(--wp--preset--spacing--30);
   }
 
-  .agenda-supporting-docs {
+  .wp-block-group.agenda-supporting-docs {
     margin-top: var(--wp--preset--spacing--30);
   }
 
-  .agenda-supporting-docs .wp-block-list li {
+  .wp-block-group.agenda-supporting-docs .wp-block-list li {
     font-size: var(--wp--preset--font-size--small);
   }
 
   /* Single column on mobile for grid layouts */
-  .agenda-supporting-docs .wp-block-list:has(li:nth-child(7)) {
+  .wp-block-group.agenda-supporting-docs .wp-block-list:has(li:nth-child(7)) {
     grid-template-columns: 1fr;
     gap: var(--wp--preset--spacing--10);
   }
@@ -234,4 +233,15 @@ ol.wp-block-listl li:last-child {
       gap: var(--wp--preset--spacing--10);
     }
   }
+}
+
+/* File Number Paragraph Spacing */
+
+.wp-block-list li p.file-number {
+  margin-bottom: 0.2rem; /* Reduced spacing after file number */
+  font-weight: 700;
+}
+
+.wp-block-list li p.file-number + p {
+  margin-top: 0; /* Remove top margin from description paragraph */
 }
