@@ -1,9 +1,9 @@
 <?php
 /**
- * Title: Parent Categories Only
- * Slug: monitor-twentyfive/hierarchical-categories
+ * Title: Parent Category Badge Accent
+ * Slug: monitor-twentyfive/parent-category-badge-accent
  * Categories: text
- * Description: Display only parent categories for posts
+ * Description: Display parent category badge with accent color for hierarchical posts
  */
 
 // Ensure we have the correct post context
@@ -55,14 +55,9 @@ if (!empty($categories)) {
     
     if (!empty($parent_badges)) {
         ?>
-        <!-- wp:group {"style":{"spacing":{"margin":{"bottom":"var:preset|spacing|20"}}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"left"}} -->
-        <div class="wp-block-group">
         <?php foreach ($parent_badges as $badge): ?>
-            <a href="<?php echo esc_url($badge['link']); ?>" class="wp-element-button" style="display: inline-block; padding: 0.5rem 1rem; background-color: var(--wp--preset--color--contrast); color: var(--wp--preset--color--base); text-decoration: none; border-radius: 4px; font-family: var(--wp--preset--font-family--libre-franklin); font-weight: 800; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.05em; margin-right: 0.5rem; margin-bottom: 0.25rem;"><?php echo esc_html($badge['name']); ?></a>
+            <a href="<?php echo esc_url($badge['link']); ?>" class="category-badge category-badge-parent category-badge-accent"><?php echo esc_html($badge['name']); ?></a>
         <?php endforeach; ?>
-        </div>
-        <!-- /wp:group -->
         <?php
     }
 }
-?>
