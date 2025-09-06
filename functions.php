@@ -176,4 +176,6 @@ function monitor_twentyfive_add_editor_styles() {
     add_editor_style('assets/css/editor-styles.css');
 }
 add_action('after_setup_theme', 'monitor_twentyfive_add_editor_styles');
+
+
 ?>
