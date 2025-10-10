@@ -245,3 +245,13 @@ Text Domain: monitor-custom
 .wp-block-list li p.file-number + p {
   margin-top: 0; /* Remove top margin from description paragraph */
 }
+
+/* Item Permalink - Remove underline from File No. links */
+a.item-permalink {
+  text-decoration: none;
+  color: inherit;
+}
+
+a.item-permalink:hover {
+  text-decoration: none;
+}
