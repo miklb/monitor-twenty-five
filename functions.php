@@ -48,6 +48,238 @@ function monitor_custom_register_patterns() {
 add_action('init', 'monitor_custom_register_patterns');
 
 /**
+ * Shortcode to display category badges (parent and child separately)
+ * This executes for each post in a query loop, unlike patterns which cache
+ */
+function monitor_custom_category_badges_shortcode($atts) {
+    // Parse attributes
+    $atts = shortcode_atts(array(
+        'accent' => 'false', // Whether to use accent styling
+    ), $atts);
+    
+    $use_accent = ($atts['accent'] === 'true');
+    
+    // Get the current post in the loop - try multiple methods
+    $post_id = get_the_ID();
+    
+    // Fallback to global $post if get_the_ID() doesn't work
+    if (!$post_id) {
+        global $post;
+        if ($post && isset($post->ID)) {
+            $post_id = $post->ID;
+        }
+    }
+    
+    if (!$post_id) {
+        return '<!-- No post ID found -->';
+    }
+    
+    $categories = get_the_category($post_id);
+    
+    if (empty($categories)) {
+        return '';
+    }
+    
+    $parent_badges = array();
+    $child_badges = array();
+    
+    foreach ($categories as $category) {
+        if (!is_object($category) || !isset($category->term_id)) {
+            continue;
+        }
+        
+        // If this is a parent category (parent == 0), show it as parent
+        if ($category->parent == 0) {
+            if (!isset($parent_badges[$category->slug])) {
+                $parent_badges[$category->slug] = array(
+                    'name' => $category->name,
+                    'link' => get_category_link($category->term_id)
+                );
+            }
+        } else {
+            // This is a child category
+            if (!isset($child_badges[$category->slug])) {
+                $child_badges[$category->slug] = array(
+                    'name' => $category->name,
+                    'link' => get_category_link($category->term_id)
+                );
+            }
+            
+            // Also find and show its top-level parent
+            $parent_id = $category->parent;
+            while ($parent_id != 0) {
+                $parent = get_category($parent_id);
+                if ($parent && !is_wp_error($parent)) {
+                    if ($parent->parent == 0) {
+                        if (!isset($parent_badges[$parent->slug])) {
+                            $parent_badges[$parent->slug] = array(
+                                'name' => $parent->name,
+                                'link' => get_category_link($parent->term_id)
+                            );
+                        }
+                        break;
+                    }
+                    $parent_id = $parent->parent;
+                } else {
+                    break;
+                }
+            }
+        }
+    }
+    
+    // Build output
+    $output = '';
+    $accent_class = $use_accent ? ' category-badge-accent' : '';
+    
+    // Display parent badges
+    if (!empty($parent_badges)) {
+        foreach ($parent_badges as $badge) {
+            $output .= sprintf(
+                '<a href="%s" class="category-badge category-badge-parent%s">%s</a>',
+                esc_url($badge['link']),
+                esc_attr($accent_class),
+                esc_html($badge['name'])
+            );
+        }
+    }
+    
+    // Display child badges
+    if (!empty($child_badges)) {
+        foreach ($child_badges as $badge) {
+            $output .= sprintf(
+                '<a href="%s" class="category-badge category-badge-child%s">%s</a>',
+                esc_url($badge['link']),
+                esc_attr($accent_class),
+                esc_html($badge['name'])
+            );
+        }
+    }
+    
+    return $output;
+}
+add_shortcode('category_badges', 'monitor_custom_category_badges_shortcode');
+
+/**
+ * Register a custom dynamic block for category badges
+ * This will properly execute in query loops unlike patterns
+ */
+function monitor_custom_register_category_badge_block() {
+    register_block_type('monitor-twentyfive/category-badges', array(
+        'render_callback' => 'monitor_custom_render_category_badges_block',
+        'attributes' => array(
+            'accent' => array(
+                'type' => 'boolean',
+                'default' => false,
+            ),
+        ),
+    ));
+}
+add_action('init', 'monitor_custom_register_category_badge_block');
+
+/**
+ * Render callback for category badges block
+ */
+function monitor_custom_render_category_badges_block($attributes) {
+    $use_accent = isset($attributes['accent']) ? $attributes['accent'] : false;
+    
+    // Get the current post ID
+    $post_id = get_the_ID();
+    if (!$post_id) {
+        return '';
+    }
+    
+    $categories = get_the_category($post_id);
+    
+    if (empty($categories)) {
+        return '';
+    }
+    
+    $parent_badges = array();
+    $child_badges = array();
+    
+    foreach ($categories as $category) {
+        if (!is_object($category) || !isset($category->term_id)) {
+            continue;
+        }
+        
+        if ($category->parent == 0) {
+            if (!isset($parent_badges[$category->slug])) {
+                $parent_badges[$category->slug] = array(
+                    'name' => $category->name,
+                    'link' => get_category_link($category->term_id)
+                );
+            }
+        } else {
+            if (!isset($child_badges[$category->slug])) {
+                $child_badges[$category->slug] = array(
+                    'name' => $category->name,
+                    'link' => get_category_link($category->term_id)
+                );
+            }
+            
+            $parent_id = $category->parent;
+            while ($parent_id != 0) {
+                $parent = get_category($parent_id);
+                if ($parent && !is_wp_error($parent)) {
+                    if ($parent->parent == 0) {
+                        if (!isset($parent_badges[$parent->slug])) {
+                            $parent_badges[$parent->slug] = array(
+                                'name' => $parent->name,
+                                'link' => get_category_link($parent->term_id)
+                            );
+                        }
+                        break;
+                    }
+                    $parent_id = $parent->parent;
+                } else {
+                    break;
+                }
+            }
+        }
+    }
+    
+    $output = '';
+    $accent_class = $use_accent ? ' category-badge-accent' : '';
+    
+    if (!empty($parent_badges)) {
+        foreach ($parent_badges as $badge) {
+            $output .= sprintf(
+                '<a href="%s" class="category-badge category-badge-parent%s">%s</a>',
+                esc_url($badge['link']),
+                esc_attr($accent_class),
+                esc_html($badge['name'])
+            );
+        }
+    }
+    
+    if (!empty($child_badges)) {
+        foreach ($child_badges as $badge) {
+            $output .= sprintf(
+                '<a href="%s" class="category-badge category-badge-child%s">%s</a>',
+                esc_url($badge['link']),
+                esc_attr($accent_class),
+                esc_html($badge['name'])
+            );
+        }
+    }
+    
+    return $output;
+}
+
+/**
+ * Enable shortcode processing in block content
+ * This is necessary for shortcodes to work in block templates
+ */
+function monitor_custom_process_shortcodes_in_blocks($block_content, $block) {
+    // Only process shortcode blocks
+    if ($block['blockName'] === 'core/shortcode' && !empty($block_content)) {
+        return do_shortcode($block_content);
+    }
+    return $block_content;
+}
+add_filter('render_block', 'monitor_custom_process_shortcodes_in_blocks', 10, 2);
+
+/**
  * Add custom meta boxes
  */
 function monitor_custom_meta_boxes() {
@@ -176,6 +408,110 @@ function monitor_twentyfive_add_editor_styles() {
     add_editor_style('assets/css/editor-styles.css');
 }
 add_action('after_setup_theme', 'monitor_twentyfive_add_editor_styles');
+
+/**
+ * Shortcode to display category badges for parent and child categories
+ * Usage: [category_badges] or [category_badges accent="true"]
+ */
+function monitor_twentyfive_category_badges_shortcode($atts) {
+    $atts = shortcode_atts(array(
+        'accent' => false,
+    ), $atts);
+    
+    $accent_class = $atts['accent'] ? ' category-badge-accent' : '';
+    
+    // Get the current post ID in the loop
+    global $post;
+    if (!$post) {
+        return '';
+    }
+    
+    $post_id = $post->ID;
+    $categories = get_the_category($post_id);
+    
+    if (empty($categories)) {
+        return '';
+    }
+    
+    $parent_badges = array();
+    $child_badges = array();
+    
+    foreach ($categories as $category) {
+        if (!is_object($category) || !isset($category->term_id)) {
+            continue;
+        }
+        
+        // If this is a parent category (parent == 0), show it as parent
+        if ($category->parent == 0) {
+            if (!isset($parent_badges[$category->slug])) {
+                $parent_badges[$category->slug] = array(
+                    'name' => $category->name,
+                    'link' => get_category_link($category->term_id)
+                );
+            }
+        } else {
+            // This is a child category - add it to child badges
+            if (!isset($child_badges[$category->slug])) {
+                $child_badges[$category->slug] = array(
+                    'name' => $category->name,
+                    'link' => get_category_link($category->term_id)
+                );
+            }
+            
+            // Also find and show its top-level parent
+            $parent_id = $category->parent;
+            
+            // Walk up to find the top-level parent
+            while ($parent_id != 0) {
+                $parent = get_category($parent_id);
+                if ($parent && !is_wp_error($parent)) {
+                    if ($parent->parent == 0) {
+                        // This is a top-level parent, add it
+                        if (!isset($parent_badges[$parent->slug])) {
+                            $parent_badges[$parent->slug] = array(
+                                'name' => $parent->name,
+                                'link' => get_category_link($parent->term_id)
+                            );
+                        }
+                        break;
+                    }
+                    $parent_id = $parent->parent;
+                } else {
+                    break;
+                }
+            }
+        }
+    }
+    
+    $output = '';
+    
+    // Display parent badges
+    if (!empty($parent_badges)) {
+        foreach ($parent_badges as $badge) {
+            $output .= sprintf(
+                '<a href="%s" class="category-badge category-badge-parent%s">%s</a>',
+                esc_url($badge['link']),
+                esc_attr($accent_class),
+                esc_html($badge['name'])
+            );
+        }
+    }
+    
+    // Display child badges
+    if (!empty($child_badges)) {
+        foreach ($child_badges as $badge) {
+            $output .= sprintf(
+                '<a href="%s" class="category-badge category-badge-child%s">%s</a>',
+                esc_url($badge['link']),
+                esc_attr($accent_class),
+                esc_html($badge['name'])
+            );
+        }
+    }
+    
+    return $output;
+}
+add_shortcode('category_badges', 'monitor_twentyfive_category_badges_shortcode');
 
 
 ?>

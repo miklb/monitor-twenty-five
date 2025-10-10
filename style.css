@@ -307,6 +307,16 @@ Text Domain: monitor-custom
   margin-top: 0.5em;
 }
 
+/* Badge containers before title - add bottom margin */
+[class*="badge-context"]:has(+ .wp-block-post-title) {
+  margin-bottom: 0.75rem;
+}
+
+/* Also handle flex containers that contain badges before title */
+.wp-block-group:has(.category-badge) {
+  margin-bottom: 0.75rem;
+}
+
 /* Context-based sizing using semantic classes */
 
 /* Large context - Single posts, main featured areas */
