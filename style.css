@@ -254,25 +254,30 @@ Text Domain: monitor-custom
   gap: var(--wp--preset--spacing--10);
 }
 
-/* Base badge styling */
-.category-badge,
-.wp-block-post-terms a {
-  display: inline-block;
-  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--20);
+/* Base badge styling - simplified to single class */
+.category-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
   text-decoration: none;
   border-radius: 4px;
   font-family: var(--wp--preset--font-family--libre-franklin);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-right: var(--wp--preset--spacing--10);
-  margin-bottom: var(--wp--preset--spacing--10);
+  margin-right: 0.5rem;
+  margin-bottom: 0.25rem;
   transition: opacity 0.2s ease;
   font-size: 0.7rem !important;
+  line-height: 1;
+  background-color: var(--wp--preset--color--contrast);
+  color: var(--wp--preset--color--base);
+  vertical-align: middle;
+  box-sizing: border-box;
 }
 
-.category-badge:hover,
-.wp-block-post-terms a:hover {
+.category-badge:hover {
   opacity: 0.8;
 }
 
@@ -282,70 +287,67 @@ Text Domain: monitor-custom
   color: var(--wp--preset--color--base);
 }
 
+/* Child category badges - default style */
+.category-badge-child {
+  background-color: var(--wp--preset--color--contrast);
+  color: var(--wp--preset--color--base);
+}
+
 /* Parent category badges - accent style for Last Week sections */
+/* Using Accent 3 (teal #1D636B) with Base text for better accessibility on dark backgrounds */
 .category-badge-accent {
-  background-color: var(--wp--preset--color--accent-1);
-  color: var(--wp--preset--color--contrast);
+  background-color: var(--wp--preset--color--accent-3);
+  color: var(--wp--preset--color--base);
 }
 
-/* Post terms badges inherit their own colors from template */
-.wp-block-post-terms {
-  margin: 0;
-}
-
-.wp-block-post-terms a {
-  /* Colors are set via block attributes in template */
+/* Spacing between post titles and badge tags */
+/* Add consistent margin-top to badge container groups */
+.wp-block-post-title + .wp-block-group,
+.wp-block-post-title + [class*="badge-context"] {
+  margin-top: 0.5em;
 }
 
 /* Context-based sizing using semantic classes */
 
 /* Large context - Single posts, main featured areas */
-.badge-context-large .category-badge,
-.badge-context-large .wp-block-post-terms a {
-  font-size: var(--wp--preset--font-size--medium);
-  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--30);
+.badge-context-large .category-badge {
+  font-size: 0.85rem !important;
+  padding: 0.75rem 1.25rem;
 }
 
 /* Standard context - Front page main sections */
-.badge-context-standard .category-badge,
-.badge-context-standard .wp-block-post-terms a {
-  font-size: var(--wp--preset--font-size--small);
-  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--20);
+.badge-context-standard .category-badge {
+  font-size: 0.7rem !important;
+  padding: 0.5rem 1rem;
 }
 
 /* Compact context - Grid layouts, sidebar areas */
-.badge-context-compact .category-badge,
-.badge-context-compact .wp-block-post-terms a {
-  font-size: var(--wp--preset--font-size--x-small);
-  padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--20);
+.badge-context-compact .category-badge {
+  font-size: 0.65rem !important;
+  padding: 0.4rem 0.8rem;
 }
 
 /* Mini context - Dense grid layouts */
-.badge-context-mini .category-badge,
-.badge-context-mini .wp-block-post-terms a {
-  font-size: 0.65rem;
+.badge-context-mini .category-badge {
+  font-size: 0.65rem !important;
   padding: 0.35rem 0.7rem;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .badge-context-large .category-badge,
-  .badge-context-large .wp-block-post-terms a {
-    font-size: var(--wp--preset--font-size--small);
-    padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--20);
+  .badge-context-large .category-badge {
+    font-size: 0.7rem !important;
+    padding: 0.5rem 1rem;
   }
 
-  .badge-context-standard .category-badge,
-  .badge-context-standard .wp-block-post-terms a {
-    font-size: var(--wp--preset--font-size--x-small);
-    padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--20);
+  .badge-context-standard .category-badge {
+    font-size: 0.65rem !important;
+    padding: 0.4rem 0.8rem;
   }
 
   .badge-context-compact .category-badge,
-  .badge-context-compact .wp-block-post-terms a,
-  .badge-context-mini .category-badge,
-  .badge-context-mini .wp-block-post-terms a {
-    font-size: 0.6rem;
+  .badge-context-mini .category-badge {
+    font-size: 0.6rem !important;
     padding: 0.3rem 0.6rem;
   }
 }
