@@ -326,38 +326,29 @@ Text Domain: monitor-custom
   gap: var(--wp--preset--spacing--20);
 }
 
-.monitor-author-bio__actions .tm-donate-block,
+/*
+ * TM Donate Block Integration
+ * 
+ * The TM Donate plugin handles all donate form styling via 
+ * /wp-content/plugins/tm-donate/assets/css/frontend.css
+ * 
+ * Theme should ONLY handle:
+ * - Layout positioning (margins, max-width, centering)
+ * - Integration with surrounding elements (spacing between author bio)
+ * 
+ * To customize donate block appearance, edit the plugin's CSS variables:
+ * --tm-donate-accent, --tm-donate-surface, --tm-donate-size-*, etc.
+ * See frontend.css lines 1-30 for available variables.
+ * 
+ * DO NOT override individual selectors (.tm-donate-title, .tm-donate-amount-btn)
+ * in the theme as this breaks the plugin's responsive design.
+ */
+
+/* Position donate block when it follows author bio */
 .monitor-author-bio + .tm-donate-block {
-  margin: var(--wp--preset--spacing--30) auto 0;
-  padding: var(--wp--preset--spacing--20);
-  border-radius: 6px;
-  box-shadow: none;
-  background: var(--wp--preset--color--base);
+  margin-top: var(--wp--preset--spacing--30);
   max-width: 720px;
-}
-
-.monitor-author-bio__actions .tm-donate-title,
-.monitor-author-bio + .tm-donate-block .tm-donate-title {
-  margin-bottom: var(--wp--preset--spacing--10);
-  font-size: 1.05rem;
-}
-
-.monitor-author-bio__actions .tm-donate-description,
-.monitor-author-bio + .tm-donate-block .tm-donate-description {
-  margin-bottom: var(--wp--preset--spacing--10);
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
-.monitor-author-bio__actions .tm-donate-amounts,
-.monitor-author-bio + .tm-donate-block .tm-donate-amounts {
-  gap: var(--wp--preset--spacing--10);
-}
-
-.monitor-author-bio__actions .tm-donate-amount-btn,
-.monitor-author-bio + .tm-donate-block .tm-donate-amount-btn {
-  padding: 0.4rem 0.75rem;
-  font-size: 0.9rem;
+  margin-inline: auto;
 }
 
 .monitor-author-bio__actions .wp-block-social-links {
