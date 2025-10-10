@@ -1,0 +1,86 @@
+<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|30","right":"var:preset|spacing|30","bottom":"var:preset|spacing|30","left":"var:preset|spacing|30"}},"border":{"width":"1px","radius":"4px"}},"borderColor":"accent-6","layout":{"type":"constrained"}} -->
+<div class="wp-block-group has-border-color has-accent-6-border-color"
+    style="border-width:1px;border-radius:4px;padding-top:var(--wp--preset--spacing--30);padding-right:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30);padding-left:var(--wp--preset--spacing--30)">
+    <!-- wp:heading {"level":3,"style":{"typography":{"fontFamily":"var(--wp--preset--font-family--libre-franklin)","fontWeight":"600"}},"fontSize":"medium"} -->
+    <h3 class="wp-block-heading has-medium-font-size"
+        style="font-family:var(--wp--preset--font-family--libre-franklin);font-weight:600">Support Our Work</h3>
+    <!-- /wp:heading -->
+
+    <!-- wp:paragraph {"fontSize":"small"} -->
+    <p class="has-small-font-size">The Tampa Monitor is a project aimed at bringing awareness to what is happening at
+        Tampa City Hall before there is a vote. Your support helps keeps the machines running and the Cafe Con Leche
+        flowing.</p>
+    <!-- /wp:paragraph -->
+
+    <!-- wp:buttons -->
+    <div class="wp-block-buttons">
+        <!-- wp:button {"backgroundColor":"accent-1","textColor":"base","width":100,"style":{"typography":{"fontFamily":"var(--wp--preset--font-family--libre-franklin)","fontWeight":"500"}}} -->
+        <div class="wp-block-button has-custom-width wp-block-button__width-100"><a href="/support"
+                class="wp-block-button__link has-base-color has-accent-1-background-color has-text-color has-background wp-element-button"
+                style="font-family:var(--wp--preset--font-family--libre-franklin);font-weight:500">Become a
+                Supporter</a></div>
+        <!-- /wp:button -->
+    </div>
+    <!-- /wp:buttons -->
+</div>
+<!-- /wp:group -->
+
+<!-- wp:spacer {"height":"var:preset|spacing|40"} -->
+<div style="height:var(--wp--preset--spacing--40)" aria-hidden="true" class="wp-block-spacer"></div>
+<!-- /wp:spacer -->
+
+<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|30","right":"var:preset|spacing|30","bottom":"var:preset|spacing|30","left":"var:preset|spacing|30"}},"border":{"width":"1px","radius":"4px"}},"borderColor":"accent-6","layout":{"type":"constrained"}} -->
+<div class="wp-block-group has-border-color has-accent-6-border-color"
+    style="border-width:1px;border-radius:4px;padding-top:var(--wp--preset--spacing--30);padding-right:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--30);padding-left:var(--wp--preset--spacing--30)">
+    <!-- wp:heading {"level":3,"style":{"typography":{"fontFamily":"var(--wp--preset--font-family--libre-franklin)","fontWeight":"600"}},"fontSize":"medium"} -->
+    <h3 class="wp-block-heading has-medium-font-size"
+        style="font-family:var(--wp--preset--font-family--libre-franklin);font-weight:600">Latest Stories</h3>
+    <!-- /wp:heading -->
+
+    <!-- Featured sticky post query -->
+    <!-- wp:query {"queryId":89,"query":{"perPage":"1","pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"only","inherit":false}} -->
+    <div class="wp-block-query">
+        <!-- wp:post-template {"style":{"spacing":{"blockGap":"var:preset|spacing|30"}}} -->
+        <!-- wp:columns {"verticalAlignment":"center","isStackedOnMobile":false,"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|20","left":"var:preset|spacing|20"}}}} -->
+        <div class="wp-block-columns are-vertically-aligned-center is-not-stacked-on-mobile">
+            <!-- wp:column {"verticalAlignment":"center","width":"33.33%"} -->
+            <div class="wp-block-column is-vertically-aligned-center" style="flex-basis:33.33%">
+                <!-- wp:post-featured-image {"isLink":true,"aspectRatio":"16/9","width":"100%","height":"80px","style":{"border":{"radius":"2px"}}} /-->
+            </div>
+            <!-- /wp:column -->
+
+            <!-- wp:column {"verticalAlignment":"center","width":"66.66%"} -->
+            <div class="wp-block-column is-vertically-aligned-center" style="flex-basis:66.66%">
+                <!-- wp:post-title {"level":6,"isLink":true,"style":{"typography":{"fontWeight":"500","fontFamily":"var(--wp--preset--font-family--libre-franklin)","lineHeight":"1.3"}},"fontSize":"small"} /-->
+            </div>
+            <!-- /wp:column -->
+        </div>
+        <!-- /wp:columns -->
+        <!-- /wp:post-template -->
+    </div>
+    <!-- /wp:query -->
+
+    <!-- Latest regular posts query (excluding sticky posts) -->
+    <!-- wp:query {"queryId":90,"query":{"perPage":"3","pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"exclude","inherit":false}} -->
+    <div class="wp-block-query">
+        <!-- wp:post-template {"style":{"spacing":{"blockGap":"var:preset|spacing|30"}}} -->
+        <!-- wp:columns {"verticalAlignment":"center","isStackedOnMobile":false,"style":{"spacing":{"blockGap":{"top":"var:preset|spacing|20","left":"var:preset|spacing|20"}}}} -->
+        <div class="wp-block-columns are-vertically-aligned-center is-not-stacked-on-mobile">
+            <!-- wp:column {"verticalAlignment":"center","width":"33.33%"} -->
+            <div class="wp-block-column is-vertically-aligned-center" style="flex-basis:33.33%">
+                <!-- wp:post-featured-image {"isLink":true,"aspectRatio":"16/9","width":"100%","height":"80px","style":{"border":{"radius":"2px"}}} /-->
+            </div>
+            <!-- /wp:column -->
+
+            <!-- wp:column {"verticalAlignment":"center","width":"66.66%"} -->
+            <div class="wp-block-column is-vertically-aligned-center" style="flex-basis:66.66%">
+                <!-- wp:post-title {"level":6,"isLink":true,"style":{"typography":{"fontWeight":"500","fontFamily":"var(--wp--preset--font-family--libre-franklin)","lineHeight":"1.3"}},"fontSize":"small"} /-->
+            </div>
+            <!-- /wp:column -->
+        </div>
+        <!-- /wp:columns -->
+        <!-- /wp:post-template -->
+    </div>
+    <!-- /wp:query -->
+</div>
+<!-- /wp:group -->
