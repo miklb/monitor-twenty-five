@@ -18,17 +18,31 @@
     </div>
     <!-- /wp:group -->
 
-    <!-- wp:navigation {"overlayBackgroundColor":"base","overlayTextColor":"contrast","style":{"spacing":{"blockGap":"var:preset|spacing|20"}},"layout":{"type":"flex","justifyContent":"right","orientation":"vertical"}} -->
-    <nav class="wp-block-navigation has-contrast-color has-base-background-color"
-      style="--wp--style--block-gap:var(--wp--preset--spacing--20)">
-      <!-- wp:navigation-link {"label":"About","url":"/about/"} /-->
-      <!-- wp:navigation-link {"label":"Tampa Land Use Map","url":"/tampa-land-use-map/"} /-->
-      <!-- wp:navigation-link {"label":"Archives","url":"/archives/"} /-->
-      <!-- wp:navigation-link {"label":"Get in Touch","url":"/contact/"} /-->
-      <!-- wp:navigation-link {"label":"Support","url":"/support/"} /-->
-      <!-- wp:search {"label":"Search","showLabel":false,"placeholder":"Full site search…","buttonText":"Search","buttonPosition":"button-inside","buttonUseIcon":true} /-->
-    </nav>
-    <!-- /wp:navigation -->
+    <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|30"}},"layout":{"type":"flex","flexWrap":"nowrap","orientation":"vertical","justifyContent":"right","verticalAlignment":"center"}} -->
+    <div class="wp-block-group">
+      <!-- wp:navigation {"overlayBackgroundColor":"base","overlayTextColor":"contrast","style":{"spacing":{"blockGap":"var:preset|spacing|20"}},"layout":{"type":"flex","justifyContent":"right","orientation":"vertical"}} -->
+      <nav class="wp-block-navigation has-contrast-color has-base-background-color"
+        style="--wp--style--block-gap:var(--wp--preset--spacing--20)">
+        <!-- wp:navigation-link {"label":"About","url":"/about/"} /-->
+        <!-- wp:navigation-link {"label":"Tampa Land Use Map","url":"/tampa-land-use-map/"} /-->
+        <!-- wp:navigation-link {"label":"Archives","url":"/archives/"} /-->
+        <!-- wp:navigation-link {"label":"Get in Touch","url":"/contact/"} /-->
+        <!-- wp:search {"label":"Search","showLabel":false,"placeholder":"Full site search…","buttonText":"Search","buttonPosition":"button-inside","buttonUseIcon":true} /-->
+      </nav>
+      <!-- /wp:navigation -->
+
+      <!-- wp:buttons -->
+      <div class="wp-block-buttons">
+        <!-- wp:button {"backgroundColor":"accent-1","textColor":"base","width":100,"style":{"typography":{"fontFamily":"var(--wp--preset--font-family--libre-franklin)","fontWeight":"600"}}} -->
+        <div class="wp-block-button has-custom-width wp-block-button__width-100"><a href="/support/"
+            class="wp-block-button__link has-base-color has-accent-1-background-color has-text-color has-background wp-element-button"
+            style="font-family:var(--wp--preset--font-family--libre-franklin);font-weight:600">Support Our Work</a>
+        </div>
+        <!-- /wp:button -->
+      </div>
+      <!-- /wp:buttons -->
+    </div>
+    <!-- /wp:group -->
   </div>
   <!-- /wp:group -->
 </div>
