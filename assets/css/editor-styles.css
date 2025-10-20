@@ -1,6 +1,12 @@
 /* Editor styles for agenda pages - Tampa Monitor Theme */
 /* This file should be enqueued in the block editor for better preview accuracy */
 
+/* Ensure strong and bold tags display properly in editor */
+.editor-styles-wrapper strong,
+.editor-styles-wrapper b {
+  font-weight: 700 !important;
+}
+
 .editor-styles-wrapper .wp-block-details {
   border: 1px solid #8a8a82; /* accent-4 */
   border-radius: 8px;

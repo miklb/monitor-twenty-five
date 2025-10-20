@@ -13,6 +13,12 @@ Text Domain: monitor-custom
 
 /* Custom styles can be added below */
 
+/* Ensure strong and bold tags display properly */
+strong,
+b {
+  font-weight: 700 !important;
+}
+
 @view-transition {
   navigation: auto;
 }
