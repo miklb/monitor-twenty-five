@@ -19,7 +19,7 @@
   
   if (!empty($caption)) : ?>
   <!-- wp:paragraph {"align":"right","style":{"typography":{"fontStyle":"italic"},"spacing":{"padding":{"top":"var:preset|spacing|10","bottom":"var:preset|spacing|10"}}},"fontSize":"small"} -->
-  <p class="has-text-align-right has-small-font-size" style="font-style:italic;padding-top:var(--wp--preset--spacing--10);padding-bottom:var(--wp--preset--spacing--10);"><?php echo esc_html($caption); ?></p>
+  <p class="has-text-align-right has-small-font-size" style="font-style:italic;padding-top:var(--wp--preset--spacing--10);padding-bottom:var(--wp--preset--spacing--10);"><?php echo wp_kses_post($caption); ?></p>
   <!-- /wp:paragraph -->
   <?php endif; ?>
 </div>
