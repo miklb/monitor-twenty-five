@@ -261,6 +261,139 @@ details[open]::details-content {
   margin-top: 0; /* Remove top margin from description paragraph */
 }
 
+/* Author Block with Donation Styling */
+.wp-block-post-author-name a {
+  color: var(--wp--preset--color--contrast);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.wp-block-post-author-name a:hover {
+  color: var(--wp--preset--color--accent-3);
+  text-decoration: underline;
+}
+
+.wp-block-post-author-biography {
+  color: var(--wp--preset--color--contrast);
+  line-height: 1.6;
+}
+
+/* Author image customization */
+.wp-block-image.has-custom-border img {
+  object-fit: cover;
+  display: block;
+}
+
+/* Responsive adjustments for author block */
+@media (max-width: 768px) {
+  .wp-block-columns .wp-block-column[style*="flex-basis:25%"],
+  .wp-block-columns .wp-block-column[style*="flex-basis:75%"] {
+    flex-basis: 100% !important;
+  }
+
+  .wp-block-image.has-custom-border img {
+    margin: 0 auto var(--wp--preset--spacing--30);
+  }
+}
+
+/* Compact author bio pattern overrides */
+.monitor-author-bio {
+  max-width: 720px;
+  margin-inline: auto;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.monitor-author-bio__layout {
+  align-items: center;
+  column-gap: var(--wp--preset--spacing--20);
+}
+
+.monitor-author-bio__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+}
+
+.monitor-author-bio__meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--10);
+}
+
+.monitor-author-bio__meta .wp-block-heading {
+  margin: 0;
+  font-size: clamp(1.25rem, 2.5vw, var(--wp--preset--font-size--large));
+}
+
+.monitor-author-bio__meta .wp-block-post-author-name,
+.monitor-author-bio__meta .wp-block-post-author-biography {
+  margin: 0;
+}
+
+.monitor-author-bio__meta .wp-block-post-author-biography {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.monitor-author-bio__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+}
+
+/*
+ * TM Donate Block Integration
+ * 
+ * The TM Donate plugin handles all donate form styling via 
+ * /wp-content/plugins/tm-donate/assets/css/frontend.css
+ * 
+ * Theme should ONLY handle:
+ * - Layout positioning (margins, max-width, centering)
+ * - Integration with surrounding elements (spacing between author bio)
+ * 
+ * To customize donate block appearance, edit the plugin's CSS variables:
+ * --tm-donate-accent, --tm-donate-surface, --tm-donate-size-*, etc.
+ * See frontend.css lines 1-30 for available variables.
+ * 
+ * DO NOT override individual selectors (.tm-donate-title, .tm-donate-amount-btn)
+ * in the theme as this breaks the plugin's responsive design.
+ */
+
+/* Position donate block when it follows author bio */
+.monitor-author-bio + .tm-donate-block {
+  margin-top: var(--wp--preset--spacing--30);
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+.monitor-author-bio__actions .wp-block-social-links {
+  justify-content: flex-start;
+}
+
+@media (max-width: 768px) {
+  .monitor-author-bio {
+    padding-inline: var(--wp--preset--spacing--20) !important;
+  }
+
+  .monitor-author-bio__layout .wp-block-column {
+    flex-basis: 100% !important;
+  }
+
+  .monitor-author-bio__layout .wp-block-column:first-child {
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--wp--preset--spacing--20);
+  }
+
+  .monitor-author-bio__content {
+    gap: var(--wp--preset--spacing--10);
+  }
+
+  .monitor-author-bio__actions {
+    gap: var(--wp--preset--spacing--10);
+  }
+}
+
 /* Category Badge System - Modern, Responsive Design */
 
 /* Badge containers */
