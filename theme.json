@@ -181,6 +181,11 @@
             "name": "main-footer",
             "title": "Main Footer",
             "area": "footer"
+        },
+        {
+            "name": "main-sidebar",
+            "title": "Main Sidebar",
+            "area": "uncategorized"
         }
     ]
 }
