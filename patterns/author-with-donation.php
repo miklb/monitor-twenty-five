@@ -38,7 +38,7 @@
       <div class="wp-block-group monitor-author-bio__actions">
         <!-- wp:social-links {"iconColor":"contrast","iconColorValue":"#314A59","iconBackgroundColor":"accent-5","iconBackgroundColorValue":"#F8F8F2","iconSize":24,"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|10"}}},"className":"is-style-default"} -->
         <ul class="wp-block-social-links has-icon-color has-icon-background-color is-style-default">
-          <!-- wp:social-link {"url":"https://bsky.app/profile/tampamonitor.com","service":"bluesky"} /-->
+          <!-- wp:social-link {"url":"https://bsky.app/profile/michaelbishop.me","service":"bluesky"} /-->
           
           <!-- wp:social-link {"url":"https://github.com/miklb","service":"github"} /-->
           
