@@ -24,7 +24,7 @@ if ( $hide_on_tbjp && has_category( 'tbjp' ) ) {
 <div class="wp-block-tm-donate-donate-block tm-donate-block">
   <div class="tm-donate-form" data-preset-amounts="[5,10,25,50,100]" data-allow-custom="true"
     data-button-text="Donate Now">
-    <h3 class="tm-donate-title">Make a Donation</h3>
+    <h3 class="tm-donate-title">Support Tampa Monitor</h3>
     <p class="tm-donate-description">Your donation helps us continue our work. Every contribution makes a
       difference.</p>
     <div class="tm-donate-amounts"><button type="button" class="tm-donate-amount-btn"

@@ -41,17 +41,47 @@ if ( has_category( 'tbjp' ) ) {
 
       <!-- wp:group {"className":"monitor-author-bio__actions","style":{"spacing":{"blockGap":"var:preset|spacing|20"}},"layout":{"type":"flex","orientation":"vertical","justifyContent":"flex-start"}} -->
       <div class="wp-block-group monitor-author-bio__actions">
-        <!-- wp:social-links {"iconColor":"contrast","iconColorValue":"#314A59","iconBackgroundColor":"accent-5","iconBackgroundColorValue":"#F8F8F2","iconSize":24,"style":{"spacing":{"blockGap":{"left":"var:preset|spacing|10"}}},"className":"is-style-default"} -->
-        <ul class="wp-block-social-links has-icon-color has-icon-background-color is-style-default">
-          <!-- wp:social-link {"url":"https://bsky.app/profile/michaelbishop.me","service":"bluesky"} /-->
-          
-          <!-- wp:social-link {"url":"https://github.com/miklb","service":"github"} /-->
-          
-          <!-- wp:social-link {"url":"https://www.linkedin.com/in/miklbishop/","service":"linkedin"} /-->
-
-          <!-- wp:social-link {"url":"https://www.facebook.com/tampamonitor","service":"facebook"} /-->
-        </ul>
-        <!-- /wp:social-links -->
+        <?php
+        // Get author ID from the current post
+        global $post;
+        $author_id = null;
+        
+        if ( $post ) {
+            $author_id = $post->post_author;
+        }
+        
+        // Fallback to queried object
+        if ( ! $author_id ) {
+            $queried = get_queried_object();
+            if ( $queried instanceof WP_Post ) {
+                $author_id = $queried->post_author;
+            }
+        }
+        
+        // Get the current post author's social links from TM Authors plugin
+        if ( $author_id && function_exists( 'tm_authors_get_social_links' ) ) {
+            $social_links = tm_authors_get_social_links( $author_id );
+            
+            if ( ! empty( $social_links ) ) {
+                // Build block markup and render it properly
+                $block_content = '<!-- wp:social-links {"iconColor":"contrast","iconColorValue":"#314A59","iconBackgroundColor":"accent-5","iconBackgroundColorValue":"#F8F8F2","size":"has-normal-icon-size","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|10"}}},"className":"is-style-default"} --><ul class="wp-block-social-links has-icon-color has-icon-background-color has-normal-icon-size is-style-default">';
+                
+                foreach ( $social_links as $platform => $data ) {
+                    $service = ( 'twitter' === $platform ) ? 'x' : $platform;
+                    $block_content .= sprintf(
+                        '<!-- wp:social-link {"url":"%s","service":"%s"} /-->',
+                        esc_url( $data['url'] ),
+                        esc_attr( $service )
+                    );
+                }
+                
+                $block_content .= '</ul><!-- /wp:social-links -->';
+                
+                // Parse and render the blocks
+                echo do_blocks( $block_content );
+            }
+        }
+        ?>
       </div>
       <!-- /wp:group -->
 
