@@ -3,8 +3,13 @@
  * Title: Author Bio
  * Slug: monitor-custom/author-with-donation
  * Categories: text
- * Description: Display author bio with custom image
+ * Description: Display author bio with custom image (hidden for TBJP syndicated content)
  */
+
+// Don't show author bio for TBJP syndicated articles
+if ( has_category( 'tbjp' ) ) {
+    return;
+}
 ?>
 
 <!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40","left":"var:preset|spacing|30","right":"var:preset|spacing|30"},"margin":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40"}},"border":{"radius":"8px","width":"1px"},"shadow":"var:preset|shadow|natural"},"borderColor":"accent-6","backgroundColor":"accent-5","className":"monitor-author-bio","layout":{"type":"constrained"}} -->
