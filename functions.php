@@ -28,6 +28,34 @@ function monitor_custom_enqueue_styles() {
 add_action( 'wp_enqueue_scripts', 'monitor_custom_enqueue_styles' );
 
 /**
+ * Hide author byline and author bio patterns for posts in category 22 (Agendas)
+ */
+function monitor_custom_hide_author_for_category_22( $block_content, $block ) {
+    // Only run on single posts
+    if ( ! is_single() ) {
+        return $block_content;
+    }
+    
+    // Check if this is one of our patterns that should be hidden
+    if ( isset( $block['blockName'] ) && $block['blockName'] === 'core/pattern' ) {
+        if ( isset( $block['attrs']['slug'] ) ) {
+            $slug = $block['attrs']['slug'];
+            
+            // Check if this is one of the patterns we want to conditionally hide
+            if ( $slug === 'monitor-custom/author-with-donation' || $slug === 'monitor-custom/post-meta-byline' ) {
+                // Check if current post has category 22 (Agendas)
+                if ( has_category( 22 ) ) {
+                    return ''; // Return empty string to hide the pattern
+                }
+            }
+        }
+    }
+    
+    return $block_content;
+}
+add_filter( 'render_block', 'monitor_custom_hide_author_for_category_22', 10, 2 );
+
+/**
  * Register custom block patterns
  */
 function monitor_custom_register_patterns() {
