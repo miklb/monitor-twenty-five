@@ -6,8 +6,14 @@
  * Description: Display author bio with custom image (hidden for TBJP syndicated content)
  */
 
-// Don't show author bio for TBJP syndicated articles or category ID 22 (Agendas)
-if ( has_category( 'tbjp' ) || has_category( 22 ) ) {
+// Don't show author bio for category ID 22 (Agendas)
+if ( has_category( 22 ) ) {
+    return;
+}
+
+// Only show for user 'mbishop'
+$author_username = get_the_author_meta( 'user_login' );
+if ( $author_username !== 'mbishop' ) {
     return;
 }
 ?>
