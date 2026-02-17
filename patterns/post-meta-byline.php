@@ -13,9 +13,11 @@ if ( has_category( 22 ) ) {
 ?>
 <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|20"}},"layout":{"type":"flex","flexWrap":"nowrap"}} -->
 <div class="wp-block-group">
-<p><!-- wp:tm-authors/author-byline {"showAvatar":false,"bylinePrefix":"By"} /-->
-
-    <!-- wp:post-date {"fontSize":"large"} /-->
+<p><!-- wp:co-authors-plus/coauthors -->
+<!-- wp:tm-authors/author-byline {"showAvatar":false,"bylinePrefix":""} /-->
+<!-- /wp:co-authors-plus/coauthors -->
 </p>
+   <p><!-- wp:post-date {"fontSize":"large"} /--></p> 
+
 </div>
 <!-- /wp:group -->
