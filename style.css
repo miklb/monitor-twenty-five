@@ -31,16 +31,19 @@ Text Domain: monitor-custom
 .content-sidebar-grid > .grid-sponsor {
   grid-column: 2;
   grid-row: 1;
+  min-width: 0;
 }
 
 .content-sidebar-grid > .grid-content {
   grid-column: 1;
   grid-row: 1 / -1;
+  min-width: 0;
 }
 
 .content-sidebar-grid > .grid-sidebar {
   grid-column: 2;
   grid-row: 2;
+  min-width: 0;
 }
 
 @media (max-width: 781px) {

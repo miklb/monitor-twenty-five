@@ -7,8 +7,15 @@ if ( ! function_exists( 'monitor_custom_setup' ) ) {
     function monitor_custom_setup() {
         // Add default posts and comments RSS feed links to head.
         add_theme_support( 'automatic-feed-links' );
-        
-        // Add theme support for other features as needed
+
+        // Set the default post thumbnail size (hero: ~65% column at 1200px wide)
+        set_post_thumbnail_size( 780, 439, true ); // 16:9 crop
+
+        // Sidebar / secondary featured images (~35% column at 1200px wide)
+        add_image_size( 'monitor-sidebar', 420, 236, true ); // 16:9 crop
+
+        // Grid cards (3-col at 1200px wide)
+        add_image_size( 'monitor-card', 380, 214, true ); // 16:9 crop
     }
 }
 add_action( 'after_setup_theme', 'monitor_custom_setup' );
