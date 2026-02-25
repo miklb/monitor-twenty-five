@@ -186,6 +186,11 @@
             "name": "main-sidebar",
             "title": "Main Sidebar",
             "area": "uncategorized"
+        },
+        {
+            "name": "sidebar-sponsor",
+            "title": "Sidebar Sponsor",
+            "area": "uncategorized"
         }
     ]
 }

@@ -13,6 +13,63 @@ Text Domain: monitor-custom
 
 /* Custom styles can be added below */
 
+/* ==========================================================================
+   Content + Sidebar Grid Layout
+   Three children: .grid-sponsor, .grid-content, .grid-sidebar
+   Desktop: 2-column grid (content left, sponsor+sidebar right)
+   Mobile:  single column reordered (sponsor → content → sidebar)
+   ========================================================================== */
+
+.content-sidebar-grid {
+  display: grid;
+  grid-template-columns: 1fr 30%;
+  grid-template-rows: auto 1fr;
+  gap: var(--wp--preset--spacing--50) var(--wp--preset--spacing--60);
+  align-items: start;
+}
+
+.content-sidebar-grid > .grid-sponsor {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.content-sidebar-grid > .grid-content {
+  grid-column: 1;
+  grid-row: 1 / -1;
+}
+
+.content-sidebar-grid > .grid-sidebar {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+@media (max-width: 781px) {
+  .content-sidebar-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: var(--wp--preset--spacing--40);
+  }
+
+  .content-sidebar-grid > .grid-sponsor {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .content-sidebar-grid > .grid-content {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .content-sidebar-grid > .grid-sidebar {
+    grid-column: 1;
+    grid-row: 3;
+  }
+}
+
+/* ==========================================================================
+   End Content + Sidebar Grid Layout
+   ========================================================================== */
+
 /* Ensure strong and bold tags display properly */
 strong,
 b {
@@ -94,7 +151,9 @@ b {
 
 details::details-content {
   opacity: 0;
-  transition: opacity 600ms, content-visibility 600ms allow-discrete;
+  transition:
+    opacity 600ms,
+    content-visibility 600ms allow-discrete;
 }
 
 details[open]::details-content {

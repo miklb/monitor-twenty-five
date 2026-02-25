@@ -4,11 +4,17 @@
 <main class="wp-block-group"
   style="margin-top:var(--wp--preset--spacing--40);margin-bottom:var(--wp--preset--spacing--40)">
 
-  <!-- wp:columns {"align":"wide","style":{"spacing":{"blockGap":{"top":"var:preset|spacing|50","left":"var:preset|spacing|60"}}}} -->
-  <div class="wp-block-columns alignwide">
+  <!-- wp:group {"align":"wide","className":"content-sidebar-grid","style":{"spacing":{"margin":{"top":"0","bottom":"0"}}},"layout":{"type":"default"}} -->
+  <div class="wp-block-group alignwide content-sidebar-grid" style="margin-top:0;margin-bottom:0">
 
-    <!-- wp:column {"width":"70%"} -->
-    <div class="wp-block-column" style="flex-basis:70%">
+    <!-- wp:group {"className":"grid-sponsor","layout":{"type":"constrained"}} -->
+    <div class="wp-block-group grid-sponsor">
+      <!-- wp:template-part {"slug":"sidebar-sponsor","area":"uncategorized"} /-->
+    </div>
+    <!-- /wp:group -->
+
+    <!-- wp:group {"className":"grid-content","layout":{"type":"constrained"}} -->
+    <div class="wp-block-group grid-content">
       <!-- wp:post-title {"level":1,"style":{"typography":{"fontFamily":"var(--wp--preset--font-family--libre-franklin)","fontWeight":"700","lineHeight":"1.2"},"spacing":{"margin":{"bottom":"var:preset|spacing|30"}}},"fontSize":"x-large"} /-->
 
       <!-- wp:post-featured-image {"aspectRatio":"16/9","style":{"object":{"position":"center center"},"width":"100%"}} /-->
@@ -19,15 +25,15 @@
 
       <!-- wp:post-content {"layout":{"type":"constrained"}} /-->
     </div>
-    <!-- /wp:column -->
+    <!-- /wp:group -->
 
-    <!-- wp:column {"width":"30%"} -->
-    <div class="wp-block-column" style="flex-basis:30%">
-      <!-- wp:template-part {"slug":"main-sidebar"} /-->
+    <!-- wp:group {"className":"grid-sidebar","layout":{"type":"constrained"}} -->
+    <div class="wp-block-group grid-sidebar">
+      <!-- wp:template-part {"slug":"main-sidebar","area":"uncategorized"} /-->
     </div>
-    <!-- /wp:column -->
+    <!-- /wp:group -->
   </div>
-  <!-- /wp:columns -->
+  <!-- /wp:group -->
 </main>
 <!-- /wp:group -->
 
