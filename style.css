@@ -14,6 +14,24 @@ Text Domain: monitor-custom
 /* Custom styles can be added below */
 
 /* ==========================================================================
+   Footer – constrain Jetpack / core search input to column width
+   ========================================================================== */
+.wp-block-columns .wp-block-column .wp-block-search,
+.wp-block-columns .wp-block-column .wp-block-jetpack-search,
+.wp-block-columns .wp-block-column .wp-block-search__inside-wrapper {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.wp-block-columns .wp-block-column .wp-block-search__input,
+.wp-block-columns .wp-block-column .jetpack-instant-search__box-input,
+.wp-block-columns .wp-block-column input[type="search"] {
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
    Content + Sidebar Grid Layout
    Three children: .grid-sponsor, .grid-content, .grid-sidebar
    Desktop: 2-column grid (content left, sponsor+sidebar right)
