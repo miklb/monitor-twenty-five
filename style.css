@@ -449,6 +449,110 @@ details[open]::details-content {
   }
 }
 
+/* ==========================================================================
+   Weekly Calendar Events Listing
+   Uses existing markup classes from the calendar script:
+     - .event-card  (article wrapper per event)
+     - .event-date  (date paragraph — add to script)
+     - .event-location (location paragraph — add to script)
+   Headings: H2 = category, H3 = event title (post title is H1)
+   ========================================================================== */
+
+/* — Category heading (H2) — left accent bar + tinted background — */
+.wp-block-post-content > h2.wp-block-heading {
+  font-family: var(--wp--preset--font-family--libre-franklin);
+  font-weight: 700;
+  font-size: var(--wp--preset--font-size--large);
+  color: var(--wp--preset--color--contrast);
+  background: var(--wp--preset--color--accent-5);
+  border-left: 4px solid var(--wp--preset--color--accent-1);
+  padding: var(--wp--preset--spacing--20) var(--wp--preset--spacing--30);
+  margin-top: var(--wp--preset--spacing--50);
+  margin-bottom: var(--wp--preset--spacing--30);
+  letter-spacing: 0.01em;
+}
+
+/* — Event card — */
+.event-card {
+  border-bottom: 1px solid var(--wp--preset--color--accent-6);
+  padding: var(--wp--preset--spacing--30) 0;
+}
+
+.event-card:last-of-type {
+  border-bottom: none;
+}
+
+/* Event title (H3) */
+.event-card h3.wp-block-heading {
+  font-family: var(--wp--preset--font-family--pt-serif);
+  font-weight: 700;
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  color: var(--wp--preset--color--contrast);
+  margin-bottom: var(--wp--preset--spacing--10);
+}
+
+/* — Date & location meta lines — */
+.event-card .event-date,
+.event-card .event-location {
+  font-family: var(--wp--preset--font-family--libre-franklin);
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--wp--preset--color--accent-4);
+  line-height: 1.4;
+  margin-top: 0;
+  margin-bottom: 0.15em;
+}
+
+/* Inline label prefix — replaces emoji icons */
+.event-card .event-date::before {
+  content: "When: ";
+  font-weight: 600;
+  color: var(--wp--preset--color--contrast);
+}
+
+.event-card .event-location::before {
+  content: "Where: ";
+  font-weight: 600;
+  color: var(--wp--preset--color--contrast);
+}
+
+/* — "View Event Details" link — */
+.event-card > p > a {
+  color: var(--wp--preset--color--accent-3);
+  font-family: var(--wp--preset--font-family--libre-franklin);
+  font-weight: 600;
+  font-size: var(--wp--preset--font-size--small, 0.875rem);
+  text-decoration: underline;
+  text-decoration-color: var(--wp--preset--color--accent-1);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  transition:
+    color 0.2s ease,
+    text-decoration-color 0.2s ease;
+}
+
+.event-card .wp-block-details a:hover,
+.event-card > p > a:hover {
+  color: var(--wp--preset--color--contrast);
+  text-decoration-color: var(--wp--preset--color--accent-3);
+}
+
+/* — Responsive — mobile — */
+@media (max-width: 768px) {
+  .wp-block-post-content > h2.wp-block-heading {
+    font-size: clamp(1rem, 4vw, var(--wp--preset--font-size--large));
+    padding: var(--wp--preset--spacing--10) var(--wp--preset--spacing--20);
+  }
+
+  .event-card {
+    padding: var(--wp--preset--spacing--20) 0;
+  }
+}
+
+/* ==========================================================================
+   End Weekly Calendar Events Listing
+   ========================================================================== */
+
 /* Category Badge System - Modern, Responsive Design */
 
 /* Badge containers */
