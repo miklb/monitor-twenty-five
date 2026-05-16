@@ -668,3 +668,400 @@ details[open]::details-content {
     padding: 0.3rem 0.6rem;
   }
 }
+
+/* ==========================================================================
+   OpenGov funding integration — agenda overview + per-item financial section
+   Mobile-first; relies on existing .wp-block-details chrome and theme tokens.
+   ========================================================================== */
+
+/* Semantic value colors — derived from the theme palette so they harmonize
+   with the existing accent-3 (teal) / accent-2 (warm red) treatments. */
+:root {
+  --funding-positive: var(--wp--preset--color--accent-3); /* #1D636B teal  */
+  --funding-negative: #b94a47; /* deeper than accent-2 for AA contrast on base */
+  --funding-zero: var(--wp--preset--color--accent-4); /* #8A8A82 neutral */
+}
+
+/* --------------------------------------------------------------------------
+   Top-of-agenda overview block
+   -------------------------------------------------------------------------- */
+.wp-block-group.agenda-funding-overview {
+  border: 1px solid var(--wp--preset--color--accent-4);
+  border-inline-start: 4px solid var(--wp--preset--color--accent-3);
+  border-radius: 8px;
+  background: var(--wp--preset--color--accent-5);
+  padding: var(--wp--preset--spacing--40);
+  margin-block: var(--wp--preset--spacing--50);
+}
+
+.agenda-funding-overview__heading {
+  font-family: var(--wp--preset--font-family--libre-franklin);
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--wp--preset--color--accent-4);
+  margin: 0 0 var(--wp--preset--spacing--20);
+}
+
+.agenda-funding-overview__net {
+  font-family: var(--wp--preset--font-family--libre-franklin);
+  font-size: 1.05rem;
+  margin: 0 0 var(--wp--preset--spacing--20);
+  color: var(--wp--preset--color--contrast);
+}
+.agenda-funding-overview__net strong {
+  font-size: 1.6rem;
+  font-variant-numeric: tabular-nums;
+  margin-inline-end: 0.4rem;
+}
+.agenda-funding-overview__net.is-positive strong {
+  color: var(--funding-positive);
+}
+.agenda-funding-overview__net.is-negative strong {
+  color: var(--funding-negative);
+}
+.agenda-funding-overview__net.is-zero strong {
+  color: var(--funding-zero);
+}
+
+.agenda-funding-overview__breakdown {
+  font-family: var(--wp--preset--font-family--libre-franklin);
+  font-size: 0.9rem;
+  color: var(--wp--preset--color--contrast);
+  margin: 0 0 var(--wp--preset--spacing--30);
+}
+
+.agenda-funding-overview__funds {
+  list-style: none;
+  margin: 0 0 var(--wp--preset--spacing--30);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-family: var(--wp--preset--font-family--libre-franklin);
+  font-size: 0.9rem;
+}
+.agenda-funding-overview__funds li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--wp--preset--spacing--30);
+  padding-block: 0.25rem;
+  border-bottom: 1px dotted var(--wp--preset--color--accent-4);
+}
+.agenda-funding-overview__funds li:last-child {
+  border-bottom: 0;
+}
+.agenda-funding-overview__fund-net {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--funding-positive);
+}
+.agenda-funding-overview__funds
+  li:has(.agenda-funding-overview__fund-net:is(:not([data-positive]))) {
+  /* placeholder — sign-aware coloring lives below via attribute selectors if needed */
+}
+
+.agenda-funding-overview__warning {
+  font-family: var(--wp--preset--font-family--libre-franklin);
+  font-size: 0.85rem;
+  color: var(--funding-negative);
+  background: #fff8c5;
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  margin: 0 0 var(--wp--preset--spacing--20);
+}
+
+.agenda-funding-overview__note {
+  font-size: 0.75rem;
+  color: var(--wp--preset--color--accent-4);
+  margin: 0;
+}
+.agenda-funding-overview__note a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   Per-item drawer — additions to existing .wp-block-details rules
+   -------------------------------------------------------------------------- */
+
+/* Section headings inside the drawer (Background, Financial impact, Staff report). */
+.agenda-item-details .agenda-item-section__heading,
+.agenda-item-details h4.wp-block-heading.agenda-item-section__heading {
+  font-family: var(--wp--preset--font-family--libre-franklin);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--wp--preset--color--accent-3);
+  margin: var(--wp--preset--spacing--40) var(--wp--preset--spacing--40)
+    var(--wp--preset--spacing--20);
+  padding: 0;
+  background: transparent;
+}
+/* First section heading flush with top of opened drawer. */
+.agenda-item-details > section:first-of-type .agenda-item-section__heading,
+.agenda-item-details > h4.agenda-item-section__heading:first-of-type {
+  margin-top: var(--wp--preset--spacing--30);
+}
+
+/* --------------------------------------------------------------------------
+   Financial impact section
+   -------------------------------------------------------------------------- */
+.agenda-item-financial {
+  padding-inline: var(--wp--preset--spacing--40);
+  padding-bottom: var(--wp--preset--spacing--30);
+  background: var(--wp--preset--color--base);
+  font-family: var(--wp--preset--font-family--libre-franklin);
+  color: var(--wp--preset--color--contrast);
+}
+
+/* Totals as a wrapping row of label/value chips. */
+.agenda-item-financial__totals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wp--preset--spacing--20);
+  margin: 0 0 var(--wp--preset--spacing--30);
+  padding: 0;
+}
+.agenda-item-financial__row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 6px;
+  background: var(--wp--preset--color--accent-5);
+  min-width: 8rem;
+  flex: 1 1 8rem;
+}
+.agenda-item-financial__row dt {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--wp--preset--color--accent-4);
+  margin: 0;
+}
+.agenda-item-financial__row dd {
+  font-size: 1rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  margin: 0;
+}
+.agenda-item-financial__row.is-net {
+  border: 1px solid var(--wp--preset--color--accent-4);
+  background: var(--wp--preset--color--base);
+}
+.agenda-item-financial__row.is-net dd {
+  font-size: 1.2rem;
+}
+.agenda-item-financial__row.is-net.is-positive dd {
+  color: var(--funding-positive);
+}
+.agenda-item-financial__row.is-net.is-negative dd {
+  color: var(--funding-negative);
+}
+.agenda-item-financial__row.is-net.is-zero dd {
+  color: var(--funding-zero);
+}
+
+/* Funding sources — stacked rows. Each row keeps its own visual hierarchy:
+   amount on top (largest), fund name, dept, object, then meta line. */
+.agenda-item-financial__sources-heading {
+  font-family: var(--wp--preset--font-family--libre-franklin);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--wp--preset--color--accent-4);
+  margin: 0 0 var(--wp--preset--spacing--10);
+  font-weight: 600;
+}
+
+.agenda-item-financial__sources {
+  list-style: none;
+  margin: 0 0 var(--wp--preset--spacing--20);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--wp--preset--spacing--20);
+}
+.agenda-item-financial__source {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.1rem;
+  padding: 0.5rem 0.7rem;
+  border-inline-start: 3px solid var(--funding-positive);
+  background: var(--wp--preset--color--accent-5);
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+.agenda-item-financial__source.is-expenditure-decrease,
+.agenda-item-financial__source.is-revenue {
+  /* decreases (less spend) and revenues (more income) are positive impacts */
+  border-inline-start-color: var(--funding-positive);
+}
+.agenda-item-financial__source.is-expenditure {
+  border-inline-start-color: var(--funding-negative);
+}
+.agenda-item-financial__amount {
+  font-weight: 700;
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--wp--preset--color--contrast);
+}
+.agenda-item-financial__fund {
+  font-weight: 600;
+}
+.agenda-item-financial__dept,
+.agenda-item-financial__object,
+.agenda-item-financial__project {
+  color: var(--wp--preset--color--contrast);
+}
+.agenda-item-financial__meta {
+  font-size: 0.75rem;
+  color: var(--wp--preset--color--accent-4);
+  font-variant-numeric: tabular-nums;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  margin-top: 0.15rem;
+}
+
+.agenda-item-financial__warning {
+  font-size: 0.8rem;
+  color: var(--funding-negative);
+  background: #fff8c5;
+  border-radius: 4px;
+  padding: 0.35rem 0.6rem;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive — small screens get tighter padding + stacked totals chips
+   -------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  .wp-block-group.agenda-funding-overview {
+    padding: var(--wp--preset--spacing--30);
+  }
+  .agenda-funding-overview__net strong {
+    font-size: 1.35rem;
+  }
+
+  .agenda-item-details .agenda-item-section__heading,
+  .agenda-item-details h4.wp-block-heading.agenda-item-section__heading {
+    margin-inline: var(--wp--preset--spacing--30);
+  }
+  .agenda-item-financial {
+    padding-inline: var(--wp--preset--spacing--30);
+  }
+  .agenda-item-financial__totals {
+    gap: 0.4rem;
+  }
+  .agenda-item-financial__row {
+    min-width: 0;
+    flex-basis: calc(50% - 0.4rem);
+  }
+  .agenda-item-financial__row.is-net {
+    flex-basis: 100%;
+  }
+}
+
+/* "Other" row in totals strip — dollar amounts cited without an account code. */
+.agenda-item-financial__row.is-other {
+  background: transparent;
+  border: 1px dashed var(--wp--preset--color--accent-4);
+}
+.agenda-item-financial__row.is-other dd {
+  color: var(--wp--preset--color--accent-4);
+}
+
+/* Aside note explaining why funding sources is empty. */
+.agenda-item-financial__note {
+  font-size: 0.8rem;
+  color: var(--wp--preset--color--accent-4);
+  font-style: italic;
+  margin: 0 0 var(--wp--preset--spacing--20);
+}
+
+/* Agenda overview "plus other amounts cited" line. */
+.agenda-funding-overview__other {
+  font-family: var(--wp--preset--font-family--libre-franklin);
+  font-size: 0.85rem;
+  color: var(--wp--preset--color--accent-4);
+  margin: 0 0 var(--wp--preset--spacing--30);
+}
+.agenda-funding-overview__other strong {
+  color: var(--wp--preset--color--contrast);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Inside .agenda-item-details, give the ol proper breathing room */
+.agenda-item-details ol {
+  padding-inline-start: 3rem;
+  margin-block: 0.75rem 0;
+}
+
+.agenda-item-details ol li {
+  margin-block-end: 0.5rem;
+}
+
+/* Fiscal impact prose statement (intro paragraph). */
+.agenda-item-financial__statement {
+  font-family: var(--wp--preset--font-family--pt-serif);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--wp--preset--color--contrast);
+  margin: 0 0 var(--wp--preset--spacing--30);
+}
+
+/* Future-year amounts line — italic call-out below totals. */
+.agenda-item-financial__future {
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--wp--preset--color--accent-4);
+  margin: 0 0 var(--wp--preset--spacing--30);
+}
+.agenda-item-financial__future strong {
+  font-style: normal;
+  font-variant-numeric: tabular-nums;
+  color: var(--wp--preset--color--contrast);
+}
+
+/* Per-source type marker chip (Expenditure / Revenue / Transfer). */
+.agenda-item-financial__marker {
+  display: inline-block;
+  align-self: start;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  background: var(--wp--preset--color--base);
+  color: var(--wp--preset--color--accent-4);
+  margin-top: 0.25rem;
+}
+
+/* "Subject to annual appropriation" tag on future-year source rows. */
+.agenda-item-financial__subject {
+  display: inline-block;
+  align-self: start;
+  font-size: 0.7rem;
+  font-style: italic;
+  color: var(--funding-zero);
+  margin-top: 0.15rem;
+}
+
+/* Source modifier: subject-to-appropriation — dashed accent so the row reads
+   as conditional/future even at a glance. */
+.agenda-item-financial__source.is-future {
+  border-inline-start-style: dashed;
+  border-inline-start-color: var(--funding-zero);
+}
+
+/* Source modifiers: revenue decreases and transfers. */
+.agenda-item-financial__source.is-revenue-decrease {
+  border-inline-start-color: var(--funding-negative);
+}
+.agenda-item-financial__source.is-transfer-in,
+.agenda-item-financial__source.is-transfer-out {
+  border-inline-start-color: var(--funding-zero);
+}
