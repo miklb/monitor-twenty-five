@@ -314,38 +314,7 @@ function monitor_custom_process_shortcodes_in_blocks($block_content, $block) {
 }
 add_filter('render_block', 'monitor_custom_process_shortcodes_in_blocks', 10, 2);
 
-/**
- * Add custom meta boxes
- */
-function monitor_custom_meta_boxes() {
-    add_meta_box(
-        'hide_featured_image',
-        'Featured Image Options',
-        'monitor_custom_featured_image_callback',
-        'post',
-        'side'
-    );
-}
-add_action('add_meta_boxes', 'monitor_custom_meta_boxes');
 
-function monitor_custom_featured_image_callback($post) {
-    $value = get_post_meta($post->ID, 'hide_featured_image', true);
-    ?>
-    <label>
-        <input type="checkbox" name="hide_featured_image" value="1" <?php checked($value, '1'); ?> />
-        Hide featured image on post
-    </label>
-    <?php
-}
-
-function monitor_custom_save_meta($post_id) {
-    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
-    if (!current_user_can('edit_post', $post_id)) return;
-    
-    $hide_featured = isset($_POST['hide_featured_image']) ? '1' : '';
-    update_post_meta($post_id, 'hide_featured_image', $hide_featured);
-}
-add_action('save_post', 'monitor_custom_save_meta');
 
 /**
  * Monitor Twenty-Five Child Theme functions and definitions
@@ -417,6 +386,7 @@ function monitor_twentyfive_meta_boxes() {
 add_action('add_meta_boxes', 'monitor_twentyfive_meta_boxes');
 
 function monitor_twentyfive_featured_image_callback($post) {
+    wp_nonce_field('monitor_twentyfive_featured_image', 'monitor_twentyfive_featured_image_nonce');
     $value = get_post_meta($post->ID, 'hide_featured_image', true);
     ?>
     <label>
@@ -428,6 +398,8 @@ function monitor_twentyfive_featured_image_callback($post) {
 
 function monitor_twentyfive_save_meta($post_id) {
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    if (!isset($_POST['monitor_twentyfive_featured_image_nonce'])) return;
+    if (!wp_verify_nonce($_POST['monitor_twentyfive_featured_image_nonce'], 'monitor_twentyfive_featured_image')) return;
     if (!current_user_can('edit_post', $post_id)) return;
     
     $hide_featured = isset($_POST['hide_featured_image']) ? '1' : '';
