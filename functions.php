@@ -379,7 +379,7 @@ function monitor_twentyfive_meta_boxes() {
         'hide_featured_image',
         'Featured Image Options',
         'monitor_twentyfive_featured_image_callback',
-        'post',
+        array('post', 'page'),
         'side'
     );
 }
@@ -388,10 +388,12 @@ add_action('add_meta_boxes', 'monitor_twentyfive_meta_boxes');
 function monitor_twentyfive_featured_image_callback($post) {
     wp_nonce_field('monitor_twentyfive_featured_image', 'monitor_twentyfive_featured_image_nonce');
     $value = get_post_meta($post->ID, 'hide_featured_image', true);
+    $post_type = get_post_type($post);
+    $label_text = ($post_type === 'page') ? 'Hide featured image on page' : 'Hide featured image on post';
     ?>
     <label>
         <input type="checkbox" name="hide_featured_image" value="1" <?php checked($value, '1'); ?> />
-        Hide featured image on post
+        <?php echo esc_html($label_text); ?>
     </label>
     <?php
 }
